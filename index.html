@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">📚</span>
+      <h1>Library Management System</h1>
+    </div>
+    <div class="who" id="whoami">
+      <span id="userInfo" class="muted">Not signed in</span>
+      <button id="logoutBtn" class="btn btn-ghost hidden">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ─────────────  Auth panel ───────────── -->
+    <section id="authPanel" class="card">
+      <div class="tabs">
+        <button class="tab active" data-tab="login">Login</button>
+        <button class="tab" data-tab="register">Register</button>
+      </div>
+
+      <form id="loginForm" class="form">
+        <label>
+          Username or email
+          <input name="username" required autocomplete="username" />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" required autocomplete="current-password" />
+        </label>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <p class="muted small">Default admin: <code>admin</code> / <code>Admin@12345</code></p>
+      </form>
+
+      <form id="registerForm" class="form hidden">
+        <label>
+          Username
+          <input name="username" required minlength="3" />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Full name
+          <input name="full_name" />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" required minlength="8" />
+        </label>
+        <button class="btn btn-primary" type="submit">Create account</button>
+      </form>
+    </section>
+
+    <!-- ─────────────  App panel  ───────────── -->
+    <section id="appPanel" class="hidden">
+      <div class="grid">
+        <!-- Books list -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Catalog</h2>
+            <input id="search" placeholder="Search title or author…" />
+          </div>
+          <div id="bookList" class="book-list"></div>
+        </div>
+
+        <!-- Side: admin form + my borrows -->
+        <div class="stack">
+          <div id="adminCard" class="card hidden">
+            <h2>Add a book <span class="pill">Admin</span></h2>
+            <form id="addBookForm" class="form">
+              <label>Title <input name="title" required /></label>
+              <label>Author <input name="author" required /></label>
+              <label>ISBN <input name="isbn" /></label>
+              <label>Category <input name="category" /></label>
+              <label>Total copies
+                <input type="number" name="total_copies" min="0" value="1" />
+              </label>
+              <label>Description <textarea name="description"></textarea></label>
+              <button class="btn btn-primary" type="submit">Create</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>My borrow history</h2>
+            <div id="historyList" class="history-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
